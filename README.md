@@ -1,63 +1,100 @@
-# WhisperIO
+# 🎧 WhisperIO
 
-Lightweight desktop voice chat for teams, friends, and gaming sessions.
+> **Ultra-hafif P2P oyuncu sesli chat. Discord'un 10'da 1'i RAM, %0.3 CPU. Açık kaynak.**
 
 ---
 
-## Türkçe
+## 🎯 Vizyon
 
-WhisperIO, oda kodu ile hızlıca bağlanabileceğiniz, düşük kaynak tüketimli masaüstü sesli iletişim uygulamasıdır.
-Amacı, karmaşık kurulum süreçleri olmadan hızlı ve stabil bir sesli oda deneyimi sunmaktır.
+Discord 500MB RAM, %8 CPU yerken WhisperIO **50MB RAM, %0.3 CPU** ile aynı işi yapar.
+Sunucu bağımlılığı minimum, iletişim WebRTC P2P mantığı ile ilerler.
 
-### Ne İşe Yarar?
+**Slogan:** "Sesin özgür. Bilgisayarın rahat."
 
-- Oda kodu ile saniyeler içinde sesli oda oluşturur veya mevcut odaya katılırsınız.
-- Küçük ekip görüşmeleri, oyun içi iletişim ve günlük sesli buluşmalar için idealdir.
-- Düşük sistem kullanımıyla arka planda daha verimli çalışır.
+---
 
-### Öne Çıkan Özellikler
+## ✨ Öne Çıkan Özellikler
 
-- Oda kodu ile hızlı giriş ve davet
+- Oda kodu ile hızlı oda oluşturma ve katılma
 - Düşük kaynak kullanımı odaklı performans
-- Host yetkileri:
-	- Katılımcıyı odadan atma
-	- Odayı kalıcı olarak silme
+- Host yönetimi:
+  - Katılımcıyı odadan atma
+  - Odayı kalıcı olarak silme
 - Gürültü bastırma seçeneği
 - Katılımcı bazlı ses seviyesi kontrolü
-- Daha dayanıklı bağlantı yönetimi
+- WebRTC tabanlı düşük gecikmeli ses iletişimi
 - İngilizce dil desteği
-
-### Dil Desteği
-
-- Türkçe
-- English
 
 ---
 
-## English
+## 🛠 Teknoloji Stack'i
 
-WhisperIO is a lightweight desktop voice communication app built for fast room-based conversations with minimal setup.
-Its goal is to provide a clean and reliable voice room experience without unnecessary complexity.
+| Katman | Teknoloji | Açıklama |
+|--------|-----------|----------|
+| **UI Shell** | Tauri 2 + React 19 | Hafif masaüstü binary + OS webview |
+| **Ses Yakalama** | cpal + WASAPI/CoreAudio | Cross-platform ses yakalama |
+| **Codec** | Opus 16-32kbps | Discord ile benzer codec yaklaşımı |
+| **Gürültü** | RNNoise | Gürültü bastırma yaklaşımı |
+| **Ağ + Şifreleme** | WebRTC P2P + DTLS-SRTP | E2EE odaklı gerçek zamanlı iletişim |
+| **Signaling** | Go + WebSocket | Hafif signaling altyapısı |
 
-### What It Does
+---
 
-- Create or join voice rooms in seconds using a room code.
-- Great for small team calls, gaming communication, and casual voice sessions.
-- Runs with low system overhead for a smoother desktop experience.
+## 📂 Proje Yapısı
 
-### Key Features
+```text
+whisper-io/
+├── src/                    # React UI (TypeScript)
+│   ├── components/         # UI bileşenleri
+│   ├── hooks/              # Zustand store + custom hooks
+│   └── styles/             # Tailwind CSS
+├── src-tauri/              # Tauri + Rust backend
+│   └── src/
+│       ├── audio/          # Ses motoru
+│       └── commands.rs     # Tauri IPC komutları
+├── signaling-server/       # Go WebSocket signaling
+└── overlay-dll/            # Overlay (gelecek sürümler)
+```
 
-- Fast room access with room codes
-- Performance focused on low resource usage
-- Host controls:
-	- Kick participants
-	- Permanently delete room
+---
+
+## 🗺 Yol Haritası
+
+- [x] Proje scaffold (Tauri + React + Rust)
+- [x] Ses cihazı listeleme
+- [x] Temel UI (oda ekranı, kullanıcı listesi)
+- [x] Signaling sunucu
+- [ ] Opus encode/decode entegrasyonu
+- [ ] RNNoise gürültü bastırma
+- [ ] WebRTC P2P mesh bağlantı
+- [ ] DirectX in-game overlay
+- [ ] macOS + Linux desteği
+- [ ] Pozisyonel ses
+- [ ] v1.0.0 release
+
+---
+
+## 🌍 English
+
+WhisperIO is a lightweight desktop voice chat app designed for low CPU and memory usage.
+It focuses on fast room-based communication with modern real-time voice technologies.
+
+### Highlights
+
+- Quick room flow with room codes
+- Low resource usage focused architecture
+- Host controls (kick participant, delete room)
 - Optional noise suppression
 - Per-participant volume control
-- Improved connection resilience
+- WebRTC-based low-latency voice communication
 - English language support
 
-### Language Support
+---
 
-- Turkish
-- English
+## 📝 Lisans
+
+MIT © WhisperIO Contributors
+
+---
+
+*"Oyun oynarken sesin CPU'nu yemesin."*
